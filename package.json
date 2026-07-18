@@ -1,0 +1,19 @@
+{
+  "name": "benita-insecure-app",
+  "version": "1.0.0",
+  "description": "Benita Fashion",
+  "main": "server.js",
+  "scripts": {
+    "start": "node seed.js && node server.js",
+    "seed": "node seed.js",
+    "postinstall": "node seed.js"
+  },
+  "dependencies": {
+    "express": "4.16.0",
+    "ejs": "2.5.7",
+    "sql.js": "1.8.0",
+    "body-parser": "1.18.2",
+    "express-session": "1.15.6",
+    "multer": "1.3.0"
+  }
+}

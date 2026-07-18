@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-dark text-white py-3">
+          <h4 class="mb-0 fw-bold"><i class="bi bi-gear-wide me-2"></i>System Administration Panel</h4>
+        </div>
+        <div class="card-body p-4">
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>Use this panel to manage system data and perform backups.
+          </div>
+
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="card border h-100">
+                <div class="card-body text-center p-4">
+                  <i class="bi bi-download display-5 text-dark"></i>
+                  <h5 class="fw-bold mt-2">Backup Database</h5>
+                  <p class="text-muted small">Download complete database backup</p>
+                  <form method="POST" action="/admin-panel/backup">
+                    <button type="submit" class="btn btn-dark w-100">Download Backup</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card border h-100">
+                <div class="card-body text-center p-4">
+                  <i class="bi bi-table display-5 text-dark"></i>
+                  <h5 class="fw-bold mt-2">Export Table</h5>
+                  <p class="text-muted small">Export any database table to JSON</p>
+                  <form method="POST" action="/admin-panel/export">
+                    <div class="input-group mb-3">
+                      <select name="table" class="form-select">
+                        <option value="users">Users</option>
+                        <option value="products">Products</option>
+                        <option value="orders">Orders</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="messages">Messages</option>
+                      </select>
+                      <button type="submit" class="btn btn-dark">Export</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

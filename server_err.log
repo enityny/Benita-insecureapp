@@ -1,0 +1,11 @@
+NotFoundError: Not Found
+    at SendStream.error (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\send\index.js:270:31)
+    at SendStream.pipe (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\send\index.js:583:14)
+    at sendfile (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\express\lib\response.js:1099:8)
+    at ServerResponse.sendFile (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\express\lib\response.js:429:3)
+    at C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\server.js:231:7
+    at Layer.handle [as handle_request] (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Sophiee\OneDrive\Desktop\Benita-webapp\node_modules\express\lib\router\index.js:281:22

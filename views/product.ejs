@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+<div class="container py-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Home</a></li>
+      <li class="breadcrumb-item"><a href="/shop" class="text-decoration-none">Shop</a></li>
+      <li class="breadcrumb-item active"><%= product.name %></li>
+    </ol>
+  </nav>
+
+  <div class="row g-5">
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <img src="<%= product.image || '/uploads/placeholder.jpg' %>" class="card-img-top" alt="<%= product.name %>" style="object-fit:cover;height:450px;">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1 class="fw-bold"><%= product.name %></h1>
+      <p class="text-muted mb-2">Category: <span class="badge bg-secondary"><%= product.category %></span></p>
+      <h2 class="text-dark fw-bold mb-3">KSh <%= Number(product.price).toLocaleString() %></h2>
+      <p class="mb-4"><%= product.description %></p>
+
+      <div class="mb-4">
+        <% if (product.stock > 0) { %>
+          <span class="badge bg-success fs-6 px-3 py-2">In Stock (<%= product.stock %> units)</span>
+        <% } else { %>
+          <span class="badge bg-danger fs-6 px-3 py-2">Out of Stock</span>
+        <% } %>
+      </div>
+
+      <div class="card border-0 bg-light p-4">
+        <h5 class="fw-bold mb-3">Place Order</h5>
+        <form method="POST" action="/orders">
+          <input type="hidden" name="product_id" value="<%= product.id %>">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Quantity</label>
+            <input type="number" name="quantity" class="form-control" value="1" min="1" max="99">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Credit Card Number</label>
+            <input type="text" name="credit_card" class="form-control" placeholder="Enter card number for payment">
+          </div>
+          <button type="submit" class="btn btn-dark w-100 py-2 fw-bold">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

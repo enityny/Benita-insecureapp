@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+<div class="container py-5">
+  <h3 class="fw-bold mb-4"><i class="bi bi-box me-2"></i>My Orders</h3>
+  <% if (orders && orders.length > 0) { %>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Order ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% orders.forEach(o => { %>
+            <tr>
+              <td>#<%= o.id %></td>
+              <td><%= o.product_name || 'N/A' %></td>
+              <td><%= o.quantity %></td>
+              <td><span class="badge bg-<%= o.status === 'pending' ? 'warning' : o.status === 'shipped' ? 'info' : 'success' %>"><%= o.status %></span></td>
+              <td><small><%= o.created_at %></small></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <div class="text-center py-5">
+      <i class="bi bi-box-seam display-1 text-muted"></i>
+      <p class="text-muted mt-3">No orders yet. Visit the <a href="/shop">shop</a> to place an order.</p>
+    </div>
+  <% } %>
+</div>
+<%- include('partials/footer') %>

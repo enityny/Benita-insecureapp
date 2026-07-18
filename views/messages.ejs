@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+<div class="container py-5">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3"><i class="bi bi-send me-2"></i>New Message</h5>
+          <form method="POST" action="/messages">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">To (Username)</label>
+              <input type="text" name="to_username" class="form-control" placeholder="Enter recipient username" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Message</label>
+              <textarea name="message" class="form-control" rows="4" placeholder="Type your message..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark w-100 py-2 fw-bold">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h5 class="fw-bold mb-3"><i class="bi bi-chat-dots me-2"></i>Messages</h5>
+      <% if (messages && messages.length > 0) { %>
+        <% messages.forEach(m => { %>
+          <div class="card border-0 shadow-sm mb-2">
+            <div class="card-body py-3">
+              <div class="d-flex justify-content-between">
+                <small class="fw-bold text-muted">
+                  <% if (m.from_user === user.id) { %>You<% } else { %>User #<%= m.from_user %><% } %>
+                  <i class="bi bi-arrow-right mx-1"></i>
+                  <% if (m.to_user === user.id) { %>You<% } else { %>User #<%= m.to_user %><% } %>
+                </small>
+                <small class="text-muted"><%= m.created_at %></small>
+              </div>
+              <p class="mb-0 mt-1"><%= m.message %></p>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="text-center py-5">
+          <i class="bi bi-envelope-open display-1 text-muted"></i>
+          <p class="text-muted mt-3">No messages yet</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

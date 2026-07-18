@@ -1,0 +1,118 @@
+<%- include('partials/header') %>
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold mb-0"><i class="bi bi-shield-lock me-2"></i>Admin Dashboard</h3>
+    <div>
+      <a href="/admin-panel" class="btn btn-outline-dark btn-sm me-2">System Panel</a>
+      <a href="/users?id=<%= user.id %>" class="btn btn-outline-dark btn-sm">My Profile</a>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-4">
+    <div class="col-md-3">
+      <div class="card border-0 shadow-sm bg-primary text-white">
+        <div class="card-body">
+          <h6 class="fw-bold">Total Users</h6>
+          <h2 class="fw-bold mb-0"><%= users ? users.length : 0 %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-0 shadow-sm bg-success text-white">
+        <div class="card-body">
+          <h6 class="fw-bold">Total Orders</h6>
+          <h2 class="fw-bold mb-0"><%= orders ? orders.length : 0 %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-0 shadow-sm bg-warning text-dark">
+        <div class="card-body">
+          <h6 class="fw-bold">Admins</h6>
+          <h2 class="fw-bold mb-0"><%= users ? users.filter(u => u.role === 'admin').length : 0 %></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card border-0 shadow-sm bg-info text-white">
+        <div class="card-body">
+          <h6 class="fw-bold">Pending Orders</h6>
+          <h2 class="fw-bold mb-0"><%= orders ? orders.filter(o => o.status === 'pending').length : 0 %></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0 fw-bold"><i class="bi bi-people me-2"></i>Registered Users</h5>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (users) { %>
+              <% users.forEach(u => { %>
+                <tr>
+                  <td><%= u.id %></td>
+                  <td><%= u.username %></td>
+                  <td><%= u.fullname %></td>
+                  <td><%= u.email %></td>
+                  <td><span class="badge bg-<%= u.role === 'admin' ? 'warning' : 'secondary' %>"><%= u.role %></span></td>
+                  <td><a href="/users?id=<%= u.id %>" class="btn btn-sm btn-outline-dark">View</a></td>
+                </tr>
+              <% }) %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0 fw-bold"><i class="bi bi-cart me-2"></i>Recent Orders</h5>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Product</th>
+              <th>User ID</th>
+              <th>Qty</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (orders) { %>
+              <% orders.forEach(o => { %>
+                <tr>
+                  <td><%= o.id %></td>
+                  <td><%= o.product_name || '#' + o.product_id %></td>
+                  <td><%= o.user_id %></td>
+                  <td><%= o.quantity %></td>
+                  <td><span class="badge bg-<%= o.status === 'pending' ? 'warning' : o.status === 'shipped' ? 'info' : 'success' %>"><%= o.status %></span></td>
+                  <td><small><%= o.created_at %></small></td>
+                </tr>
+              <% }) %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

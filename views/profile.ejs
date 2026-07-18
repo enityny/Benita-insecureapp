@@ -1,0 +1,89 @@
+<%- include('partials/header') %>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-dark text-white py-3">
+          <h4 class="mb-0 fw-bold"><i class="bi bi-person-circle me-2"></i>My Profile</h4>
+        </div>
+        <div class="card-body p-4">
+          <% if (updated) { %>
+            <div class="alert alert-success"><%= updated %></div>
+          <% } %>
+
+          <div class="text-center mb-4">
+            <img src="<%= user.avatar || '/uploads/default-avatar.png' %>" class="rounded-circle mb-3" width="120" height="120" style="object-fit:cover;border:3px solid #dee2e6;">
+            <h5 class="fw-bold"><%= user.fullname || user.username %></h5>
+            <p class="text-muted">@<%= user.username %> | <%= user.role %></p>
+          </div>
+
+          <form method="POST" action="/profile" enctype="multipart/form-data">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Full Name</label>
+                <input type="text" name="fullname" class="form-control" value="<%= user.fullname || '' %>">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Username</label>
+                <input type="text" class="form-control" value="<%= user.username %>" disabled>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold">Bio</label>
+                <textarea name="bio" class="form-control" rows="3"><%= user.bio || '' %></textarea>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Avatar (Upload)</label>
+                <input type="file" name="avatar" class="form-control" accept="image/*">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Avatar (URL)</label>
+                <div class="input-group">
+                  <input type="url" name="avatar_url" class="form-control" placeholder="https://example.com/avatar.jpg" form="avatarUrlForm">
+                  <button type="submit" class="btn btn-outline-dark" form="avatarUrlForm">Fetch</button>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-dark w-100 py-2 fw-bold mt-4">Update Profile</button>
+          </form>
+
+          <form id="avatarUrlForm" method="POST" action="/profile/avatar-url"></form>
+        </div>
+      </div>
+
+      <div class="card border-0 shadow-sm mt-4">
+        <div class="card-header bg-dark text-white py-3">
+          <h5 class="mb-0 fw-bold"><i class="bi bi-info-circle me-2"></i>Account Details</h5>
+        </div>
+        <div class="card-body p-4">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <small class="text-muted">Email</small>
+              <p class="fw-semibold mb-0"><%= user.email || 'Not set' %></p>
+            </div>
+            <div class="col-sm-6">
+              <small class="text-muted">Member Since</small>
+              <p class="fw-semibold mb-0"><%= user.created_at || 'N/A' %></p>
+            </div>
+            <div class="col-sm-6">
+              <small class="text-muted">User ID</small>
+              <p class="fw-semibold mb-0">#<%= user.id %></p>
+            </div>
+            <div class="col-sm-6">
+              <small class="text-muted">Role</small>
+              <p class="fw-semibold mb-0"><%= user.role %></p>
+            </div>
+            <div class="col-sm-6">
+              <small class="text-muted">Credit Card</small>
+              <p class="fw-semibold mb-0"><%= user.credit_card || 'Not set' %></p>
+            </div>
+            <div class="col-sm-6">
+              <small class="text-muted">SSN</small>
+              <p class="fw-semibold mb-0"><%= user.ssn || 'Not set' %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>
